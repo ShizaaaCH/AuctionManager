@@ -13,4 +13,4 @@ Content-Type: application/json
 
 
 ###
-GET {{host}}/auctions
+GET http://localhost:5074/auctions/

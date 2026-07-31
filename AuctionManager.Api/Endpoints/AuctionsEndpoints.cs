@@ -22,6 +22,8 @@ public static class AuctionsEndpoints
             }
         );
 
+
+        //GET By ID
         group.MapGet("/{id:int}",
             async (int id, CancellationToken ct, GetAuctionByIdHandler handler) =>
             {
@@ -50,6 +52,7 @@ public static class AuctionsEndpoints
                 return Results.Created(
                     $"/auctions/{id}",
                     new { Id = id });
-            });
+            }
+        );
     }
 }

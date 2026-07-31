@@ -2,6 +2,7 @@ using AuctionManager.Api.Data;
 using AuctionManager.Api.Endpoints;
 using AuctionManager.Api.Repositories;
 using AuctionManager.Api.UseCases.GetAllAuctions;
+using AuctionManager.Api.UseCases.GetAuctionById;
 using AuctionManager.Api.UseCases.RegisterAuction;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AuctionDbContext>(options =>
 builder.Services.AddScoped<IAuctionRepository,AuctionRepository>();
 builder.Services.AddScoped<RegisterAuctionHandler>();
 builder.Services.AddScoped<GetAllAuctionsHandler>();
+builder.Services.AddScoped<GetAuctionByIdHandler>();
 
 var app = builder.Build();
 app.MapAuctionsEndpoints();
