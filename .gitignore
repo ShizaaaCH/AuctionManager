@@ -1,0 +1,42 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+
+# Visual Studio
+.vs/
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+
+# EF Core local databases
+*.sqlite
+*.sqlite3
+
+# ASP.NET secrets
+secrets.json
+
+# Publish output
+publish/
+
+# NuGet
+*.nupkg
+
+# OS files
+.DS_Store
+Thumbs.db

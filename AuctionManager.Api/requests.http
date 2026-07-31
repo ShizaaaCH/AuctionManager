@@ -1,0 +1,16 @@
+@host = http://localhost:5074
+
+###
+POST {{host}}/auctions
+Content-Type: application/json
+
+{
+    "name": "Pokemon Yellow",
+    "auctionPrice": 12500,
+    "proxyServiceName": "ZenMarket",
+    "wonAt": "2026-07-30"
+}
+
+
+###
+GET {{host}}/auctions
