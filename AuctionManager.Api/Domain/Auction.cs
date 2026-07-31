@@ -35,4 +35,18 @@ public class Auction
     private Auction()
     {
     }
+
+    public void UpdateGeneralInfo(
+        string name,
+        decimal auctionPrice,
+        string proxyServiceName,
+        DateOnly wonAt)
+    {
+        // validations here
+
+        Name = name;
+        AuctionPrice = auctionPrice;
+        ProxyServiceName = proxyServiceName;
+        WonAt = wonAt;
+    }
 }

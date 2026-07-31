@@ -1,6 +1,7 @@
 @host = http://localhost:5074
 
 ###
+# Create Auction
 POST {{host}}/auctions
 Content-Type: application/json
 
@@ -11,6 +12,50 @@ Content-Type: application/json
     "wonAt": "2026-07-30"
 }
 
+###
+# Create Auction
+POST {{host}}/auctions
+Content-Type: application/json
+
+{
+    "name": "Pokemon Crystal",
+    "auctionPrice": 15000,
+    "proxyServiceName": "Buyee",
+    "wonAt": "2026-07-29"
+}
 
 ###
-GET http://localhost:5074/auctions/
+# Get All Auctions
+GET {{host}}/auctions
+
+###
+# Get Auction By Id
+GET {{host}}/auctions/4
+
+###
+# Update General Info
+PUT {{host}}/auctions/4/generalInfo
+Content-Type: application/json
+
+{
+    "name": "TEST UPDATE",
+    "auctionPrice": 13000,
+    "proxyServiceName": "ZenMarket",
+    "wonAt": "2026-07-30"
+}
+
+###
+# Verify Update
+GET {{host}}/auctions/1
+
+###
+# Test Not Found
+PUT {{host}}/auctions/999/generalInfo
+Content-Type: application/json
+
+{
+    "name": "Test",
+    "auctionPrice": 100,
+    "proxyServiceName": "Test",
+    "wonAt": "2026-07-30"
+}
