@@ -3,6 +3,7 @@ using AuctionManager.Api.UseCases.GetAllAuctions;
 using AuctionManager.Api.UseCases.GetAuctionById;
 using AuctionManager.Api.UseCases.RegisterAuction;
 using AuctionManager.Api.UseCases.UpdateAuctionGeneralInfo;
+using AuctionManager.Api.UseCases.UpdateAuctionShippingInfo;
 
 namespace AuctionManager.Api.Endpoints;
 
@@ -72,5 +73,18 @@ public static class AuctionsEndpoints
                     : Results.NotFound();
             }
         );
+
+        group.MapPut("/{id:int}/shipping", async (int id, UpdateAuctionShippingInfoDto dto, UpdateAuctionShippingInfoHandler handler, CancellationToken ct) =>
+        {
+            var command = new UpdateAuctionShippingInfoCommand(
+                dto.LocalShippingPrice, dto.InternationalShippingMethod, dto.InternationalShippingPrice
+            );
+
+            var completed = await handler.HandleAsync(id, command, ct);
+
+            return completed
+                ? Results.NoContent()
+                : Results.NotFound();
+        });
     }
 }

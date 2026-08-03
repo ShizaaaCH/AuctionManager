@@ -49,4 +49,14 @@ public class Auction
         ProxyServiceName = proxyServiceName;
         WonAt = wonAt;
     }
+
+    public void UpdateShippingInfo(
+        decimal? localShippingPrice,
+        string? internationalShippingMethod,
+        decimal? internationalShippingPrice)
+    {
+        LocalShippingPrice = localShippingPrice;
+        InternationalShippingMethod = internationalShippingMethod;
+        InternationalShippingPrice = internationalShippingPrice;
+    }
 }

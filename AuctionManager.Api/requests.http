@@ -59,3 +59,23 @@ Content-Type: application/json
     "proxyServiceName": "Test",
     "wonAt": "2026-07-30"
 }
+
+###
+#Test Update Shipping Info
+PUT {{host}}/auctions/4/shipping
+Content-Type: application/json
+
+{
+    "localShippingPrice": 1000,
+    "internationalShippingMethod": "FedEx",
+    "internationalShippingPrice": 2000
+}
+
+###
+#TEST partial update shipping info
+PUT {{host}}/auctions/4/shipping
+Content-Type: application/json
+
+{
+    "localShippingPrice": 1500
+}
