@@ -8,6 +8,9 @@ public interface IAuctionRepository
         Auction action,
         CancellationToken cancellationToken = default);
 
+    void Delete(Auction auction,
+        CancellationToken cancellationToken = default);
+
     Task<Auction?> GetByIdAsync(
         int id,
         CancellationToken cancellationToken = default);

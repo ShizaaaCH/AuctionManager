@@ -1,4 +1,5 @@
 using AuctionManager.Api.Dtos;
+using AuctionManager.Api.UseCases.DeleteAuctionById;
 using AuctionManager.Api.UseCases.GetAllAuctions;
 using AuctionManager.Api.UseCases.GetAuctionById;
 using AuctionManager.Api.UseCases.RegisterAuction;
@@ -74,6 +75,7 @@ public static class AuctionsEndpoints
             }
         );
 
+        //PUT update shipping info
         group.MapPut("/{id:int}/shipping", async (int id, UpdateAuctionShippingInfoDto dto, UpdateAuctionShippingInfoHandler handler, CancellationToken ct) =>
         {
             var command = new UpdateAuctionShippingInfoCommand(
@@ -81,6 +83,16 @@ public static class AuctionsEndpoints
             );
 
             var completed = await handler.HandleAsync(id, command, ct);
+
+            return completed
+                ? Results.NoContent()
+                : Results.NotFound();
+        });
+    
+        //DELETE auction by id
+        group.MapDelete("/{id:int}", async (int id, DeleteAuctionByIdHandler handler, CancellationToken ct) =>
+        {
+            var completed = await handler.HandleAsync(id, ct);
 
             return completed
                 ? Results.NoContent()

@@ -20,6 +20,11 @@ public class AuctionRepository : IAuctionRepository
         return auction;
     }
 
+    public void Delete(Auction auction, CancellationToken cancellationToken = default)
+    {
+        _context.Auctions.Remove(auction);
+    }
+
     public async Task<List<Auction>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _context.Auctions.ToListAsync(cancellationToken);

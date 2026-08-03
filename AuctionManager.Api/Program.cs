@@ -1,6 +1,7 @@
 using AuctionManager.Api.Data;
 using AuctionManager.Api.Endpoints;
 using AuctionManager.Api.Repositories;
+using AuctionManager.Api.UseCases.DeleteAuctionById;
 using AuctionManager.Api.UseCases.GetAllAuctions;
 using AuctionManager.Api.UseCases.GetAuctionById;
 using AuctionManager.Api.UseCases.RegisterAuction;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<GetAllAuctionsHandler>();
 builder.Services.AddScoped<GetAuctionByIdHandler>();
 builder.Services.AddScoped<UpdateAuctionGeneralInfoHandler>();
 builder.Services.AddScoped<UpdateAuctionShippingInfoHandler>();
+builder.Services.AddScoped<DeleteAuctionByIdHandler>();
 
 var app = builder.Build();
 app.MapAuctionsEndpoints();

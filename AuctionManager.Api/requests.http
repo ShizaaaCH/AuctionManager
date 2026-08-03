@@ -79,3 +79,15 @@ Content-Type: application/json
 {
     "localShippingPrice": 1500
 }
+
+###
+# Test Not Found Update Shipping Info
+PUT {{host}}/auctions/999/shipping
+Content-Type: application/json
+
+{
+    "localShippingPrice": 1500
+}
+
+### Test Delete Auction By Id
+DELETE {{host}}/auctions/6
