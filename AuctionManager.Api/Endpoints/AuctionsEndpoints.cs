@@ -1,4 +1,5 @@
 using AuctionManager.Api.Dtos;
+using AuctionManager.Api.UseCases.Common;
 using AuctionManager.Api.UseCases.DeleteAuctionById;
 using AuctionManager.Api.UseCases.GetAllAuctions;
 using AuctionManager.Api.UseCases.GetAuctionById;
@@ -67,11 +68,22 @@ public static class AuctionsEndpoints
                 );
 
 
-                var completed = await handler.HandleAsync(id, command, ct);
+                var result = await handler.HandleAsync(id, command, ct);
 
-                return completed
-                    ? Results.NoContent()
-                    : Results.NotFound();
+                if (result.Success)
+                {
+                    return Results.NoContent();
+                }
+                else
+                {
+                    return result.Type switch
+                    {
+                        ErrorType.NotFound => Results.NotFound(result.ErrorMessage),
+                        ErrorType.Validation => Results.BadRequest(result.ErrorMessage),
+                        ErrorType.Conflict => Results.Conflict(result.ErrorMessage),
+                        _ => Results.StatusCode(500)
+                    };
+                }
             }
         );
 
@@ -92,11 +104,22 @@ public static class AuctionsEndpoints
         //DELETE auction by id
         group.MapDelete("/{id:int}", async (int id, DeleteAuctionByIdHandler handler, CancellationToken ct) =>
         {
-            var completed = await handler.HandleAsync(id, ct);
+            var result = await handler.HandleAsync(id, ct);
 
-            return completed
-                ? Results.NoContent()
-                : Results.NotFound();
+            if (result.Success)
+            {
+                return Results.NoContent();
+            }
+            else
+            {
+                return result.Type switch
+                {
+                    ErrorType.NotFound => Results.NotFound(result.ErrorMessage),
+                    ErrorType.Validation => Results.BadRequest(result.ErrorMessage),
+                    ErrorType.Conflict => Results.Conflict(result.ErrorMessage),
+                    _ => Results.StatusCode(500)
+                };
+            }
         });
     }
 }

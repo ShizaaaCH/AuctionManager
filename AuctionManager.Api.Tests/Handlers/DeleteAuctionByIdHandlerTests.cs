@@ -1,5 +1,6 @@
 using AuctionManager.Api.Domain;
 using AuctionManager.Api.Tests.Fakes;
+using AuctionManager.Api.UseCases.Common;
 using AuctionManager.Api.UseCases.DeleteAuctionById;
 
 namespace AuctionManager.Api.Tests.Handlers;
@@ -7,7 +8,7 @@ namespace AuctionManager.Api.Tests.Handlers;
 public class DeleteAuctionByIdHandlerTests
 {
     [Fact]
-    public async Task HandleAsync_WhenAuctionDoesNotExist_ReturnsFalse()
+    public async Task HandleAsync_WhenAuctionDoesNotExist_ReturnsNotFound()
     {
         // Try to delete an auction that does not exist, should return false
 
@@ -20,11 +21,13 @@ public class DeleteAuctionByIdHandlerTests
         var result = await handler.HandleAsync(auctionId, CancellationToken.None);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.Success);
+        Assert.Equal(ErrorType.NotFound, result.Type);
+        Assert.NotNull(result.ErrorMessage);
     }
 
     [Fact]
-    public async Task HandleAsync_WhenAuctionExists_ReturnsTrue()
+    public async Task HandleAsync_WhenAuctionExists_ReturnsOk()
     {
         // Try to delete an auction that exists, should return true
 
@@ -37,7 +40,8 @@ public class DeleteAuctionByIdHandlerTests
         var result = await handler.HandleAsync(existingAuction.Id, CancellationToken.None);
 
         // Assert
-        Assert.True(result);
+        Assert.True(result.Success);
+        Assert.Null(result.ErrorMessage);
 
         var auctions = await fakeAuctionRepository.GetAllAsync();
         Assert.Empty(auctions);

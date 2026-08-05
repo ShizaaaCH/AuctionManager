@@ -1,5 +1,6 @@
 using AuctionManager.Api.Domain;
 using AuctionManager.Api.Tests.Fakes;
+using AuctionManager.Api.UseCases.Common;
 using AuctionManager.Api.UseCases.UpdateAuctionGeneralInfo;
 
 namespace AuctionManager.Api.Tests.Handlers;
@@ -7,9 +8,9 @@ namespace AuctionManager.Api.Tests.Handlers;
 public class UpdateAuctionGeneralInfoHandlerTests
 {
     [Fact]
-    public async Task HandleAsync_WhenAuctionDoesNotExist_ReturnsFalse()
+    public async Task HandleAsync_WhenAuctionDoesNotExist_ReturnsNotFoundResult()
     {
-        // Try to update an auction that does not exist, should return false
+        // Try to update an auction that does not exist, should return not found result
 
         // Arrange
         var fakeAuctionRepository = new FakeAuctionRepository(new List<Auction>());
@@ -21,13 +22,14 @@ public class UpdateAuctionGeneralInfoHandlerTests
         var result = await handler.HandleAsync(auctionId, command, CancellationToken.None);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.Success);
+        Assert.Equal(ErrorType.NotFound, result.Type);
     }
 
     [Fact]
-    public async Task HandleAsync_WhenAuctionExists_UpdatesAuctionAndReturnsTrue()
+    public async Task HandleAsync_WhenAuctionExists_UpdatesAuctionAndReturnsOkResult()
     {
-        // Try to update an auction that exists, should return true and update the auction
+        // Try to update an auction that exists, should return ok result and update the auction
 
         // Arrange
         var existingAuction = new Auction("Old Title", 100.0m, "Old Proxy", new DateOnly(2023, 1, 1));
@@ -40,7 +42,7 @@ public class UpdateAuctionGeneralInfoHandlerTests
         var result = await handler.HandleAsync(auctionId, command, CancellationToken.None);
 
         // Assert
-        Assert.True(result);
+        Assert.True(result.Success);
         Assert.Equal("New Title", existingAuction.Name);
         Assert.Equal(200.0m, existingAuction.AuctionPrice);
         Assert.Equal("New Proxy", existingAuction.ProxyServiceName);
