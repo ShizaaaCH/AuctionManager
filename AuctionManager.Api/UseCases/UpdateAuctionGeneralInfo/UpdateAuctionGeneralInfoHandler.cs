@@ -20,7 +20,7 @@ public class UpdateAuctionGeneralInfoHandler
         if (auction is null) return Result.NotFound($"Auction with ID {id} not found.");
 
         auction.UpdateGeneralInfo(command.Name, command.AuctionPrice, command.ProxyServiceName,
-            command.WonAt);
+            command.WonAt, command.ProxyServiceFee);
 
         await _auctionRepository.SaveChangesAsync(cancellationToken);
 

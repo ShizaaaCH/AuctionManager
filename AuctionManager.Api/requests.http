@@ -18,10 +18,10 @@ POST {{host}}/auctions
 Content-Type: application/json
 
 {
-    "name": "Pokemon Crystal",
-    "auctionPrice": 15000,
-    "proxyServiceName": "Buyee",
-    "wonAt": "2026-07-29"
+    "name": "Granblue Fantasy Relink: Endless Ragnarok (Sw",
+    "auctionPrice": 6200,
+    "proxyServiceName": "ZenMarket",
+    "wonAt": "2026-08-01"
 }
 
 ###
@@ -46,7 +46,7 @@ Content-Type: application/json
 
 ###
 # Verify Update
-GET {{host}}/auctions/1
+GET {{host}}/auctions/8
 
 ###
 # Test Not Found
@@ -62,22 +62,22 @@ Content-Type: application/json
 
 ###
 #Test Update Shipping Info
-PUT {{host}}/auctions/4/shipping
+PUT {{host}}/auctions/8/shipping
 Content-Type: application/json
 
 {
-    "localShippingPrice": 1000,
+    "localShippingCost": 0,
     "internationalShippingMethod": "FedEx",
-    "internationalShippingPrice": 2000
+    "internationalShippingCost": 2000
 }
 
 ###
 #TEST partial update shipping info
-PUT {{host}}/auctions/4/shipping
+PUT {{host}}/auctions/8/shipping
 Content-Type: application/json
 
 {
-    "localShippingPrice": 1500
+    "localShippingCost": 0
 }
 
 ###
@@ -86,8 +86,8 @@ PUT {{host}}/auctions/999/shipping
 Content-Type: application/json
 
 {
-    "localShippingPrice": 1500
+    "localShippingCost": 1500
 }
 
 ### Test Delete Auction By Id
-DELETE {{host}}/auctions/6
+DELETE {{host}}/auctions/7

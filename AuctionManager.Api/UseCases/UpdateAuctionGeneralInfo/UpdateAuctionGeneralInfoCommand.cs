@@ -4,5 +4,6 @@ public record UpdateAuctionGeneralInfoCommand(
     string Name,
     decimal AuctionPrice,
     string ProxyServiceName,
-    DateOnly WonAt
+    DateOnly WonAt,
+    decimal? ProxyServiceFee
 );

@@ -4,5 +4,6 @@ public record class CreateAuctionDto(
     string Name,
     decimal AuctionPrice,
     string ProxyServiceName,
-    DateOnly WonAt
+    DateOnly WonAt,
+    decimal? ProxyServiceFee
 );

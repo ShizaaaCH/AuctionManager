@@ -47,7 +47,8 @@ public static class AuctionsEndpoints
                     dto.Name,
                     dto.AuctionPrice,
                     dto.ProxyServiceName,
-                    dto.WonAt);
+                    dto.WonAt,
+                    dto.ProxyServiceFee);
 
                 var id = await handler.HandleAsync(
                     command,
@@ -64,7 +65,7 @@ public static class AuctionsEndpoints
             async (int id, UpdateAuctionGeneralInfoDto dto, UpdateAuctionGeneralInfoHandler handler, CancellationToken ct) =>
             {
                 var command = new UpdateAuctionGeneralInfoCommand(
-                    dto.Name, dto.AuctionPrice, dto.ProxyServiceName, dto.WonAt
+                    dto.Name, dto.AuctionPrice, dto.ProxyServiceName, dto.WonAt, dto.ProxyServiceFee
                 );
 
 

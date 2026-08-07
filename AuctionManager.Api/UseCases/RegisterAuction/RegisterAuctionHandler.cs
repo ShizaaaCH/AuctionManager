@@ -21,7 +21,8 @@ public class RegisterAuctionHandler
             command.Name,
             command.AuctionPrice,
             command.ProxyServiceName,
-            command.WonAt);
+            command.WonAt,
+            command.ProxyServiceFee);
 
         await _auctionRepository.AddAsync(
             auction,

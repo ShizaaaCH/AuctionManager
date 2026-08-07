@@ -16,7 +16,7 @@ public class RegisterAuctionHandlerTests
         var handler = new RegisterAuctionHandler(fakeAuctionRepository);
 
         // Act
-        var command = new RegisterAuctionCommand("TITLE", 999.0m, "ZenMarket", new DateOnly(2024, 1, 1));
+        var command = new RegisterAuctionCommand("TITLE", 999.0m, "ZenMarket", new DateOnly(2024, 1, 1), 67.0m);
         var result = await handler.HandleAsync(command, CancellationToken.None);
 
         // Assert

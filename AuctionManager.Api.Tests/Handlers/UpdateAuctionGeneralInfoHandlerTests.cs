@@ -18,7 +18,7 @@ public class UpdateAuctionGeneralInfoHandlerTests
 
         // Act
         var auctionId = 999;
-        var command = new UpdateAuctionGeneralInfoCommand("TITLE", 999.0m, "ZenMarket", new DateOnly(2024, 1, 1));
+        var command = new UpdateAuctionGeneralInfoCommand("TITLE", 999.0m, "ZenMarket", new DateOnly(2024, 1, 1), 67.0m);
         var result = await handler.HandleAsync(auctionId, command, CancellationToken.None);
 
         // Assert
@@ -38,7 +38,7 @@ public class UpdateAuctionGeneralInfoHandlerTests
 
         // Act
         var auctionId = 0; // Assuming the existing auction has an ID of 0
-        var command = new UpdateAuctionGeneralInfoCommand("New Title", 200.0m, "New Proxy", new DateOnly(2024, 1, 1));
+        var command = new UpdateAuctionGeneralInfoCommand("New Title", 200.0m, "New Proxy", new DateOnly(2024, 1, 1), 10.0m);
         var result = await handler.HandleAsync(auctionId, command, CancellationToken.None);
 
         // Assert
